@@ -13,16 +13,14 @@ list* createlist(int maxElements)
 	int allocateSize = maxElements + 2;
 
 	/* Allocate spcace for list */
-	void * listPointer = malloc((allocateSize) * sizeof(int));
-
-	/* Create pointer to first avaiable position in list */
-	list * this_list = (list *) listPointer + 2;
-
-	/* Initialize size and capacity */
-	this_list[-2] = 0; 			/* size */
-	this_list[-1] = maxElements; /* capacity */
-
-	return this_list;
+	list * listPointer = malloc((allocateSize) * sizeof(int));
+	
+	/* Initialize size and capacity */	
+	listPointer->size = 0;
+	listPointer->maxSize = maxElements;
+	
+	/* return pointer to list */
+	return listPointer;
 
 }
 
@@ -38,10 +36,6 @@ list* createlist(int maxElements)
  */
 int insert(list *ls, int val)
 {
-	int size, capacity;
-
-	/* Get the size of the list */
-	size = &(ls
 
 }
 
