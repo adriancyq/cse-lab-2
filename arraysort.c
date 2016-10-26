@@ -45,16 +45,17 @@ int insert(list *ls, int val)
 	
 	/* Check if the list is full */
 	if ((ls->size) == (ls->maxSize)) {
-		doubledSortedList = realloc(ls->sortedList, (ls->maxSize * 2));
+		doubledSortedList = realloc((void*)(ls->sortedList), (ls->maxSize) * 2 * sizeof(int));
 		
 		/* Check if we reallocated memory successfully */
 		if (doubledSortedList == NULL) {
 			return -1;
 		}
 		
-		/* Update the pointer to point to new list */
+		/* Update the maxsize and the pointer to point to new list */
 		else {
 			ls->sortedList = doubledSortedList;
+			ls->maxSize = ls->maxSize * 2;
 		}
 	}
 
