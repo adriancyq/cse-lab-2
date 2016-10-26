@@ -72,6 +72,11 @@ int insert(list *ls, int val)
 			ls->sortedList[index] = tempNum;
 			break;
 		}
+		
+		/* If element is the same as one before, stay */
+		if (ls->sortedList[index] == ls->sortedList[index - 1]) {
+			break;
+		}
 	}
 	
 	/* Update list element counter */
@@ -82,6 +87,8 @@ int insert(list *ls, int val)
 
 }
 
+
+
 /**
  * This function takes a pointer to the list and an integer value as input. It
  * should delete all instances of elements in the sortedList with value 'val',
@@ -91,6 +98,8 @@ int insert(list *ls, int val)
 int remove_val(list *ls, int val)
 {
 }
+
+
 
 /**
  * This function takes a pointer to the the list as input and returns the
@@ -112,6 +121,17 @@ int get_min_value(list *ls){
  * list. It returns -1 if the value 'val' is not present in the list.
  */
 int search(list *ls, int val){
+	int index;
+	
+	/* Iterate through the array */
+	for (index = 0; index < ls->maxSize; index = index + 1) {
+		if (ls->sortedList[index] == val) {
+			return index;
+		}
+	}
+	
+	/* Return -1 if value is not found */
+	return -1;
 }
 
 /**
@@ -119,6 +139,27 @@ int search(list *ls, int val){
  * list. It returns -1 if the list is empty.
  */
 int pop_min(list *ls){
+
+	int minNum, index;
+	
+	/* Check if the list is empty */
+	if (ls->size == 0) {
+		return -1;
+	}
+
+	/* Grab the first (smallest) number in the array */
+	minNum = ls->sortedList[0];
+	
+	/* Decrease the list element counter */
+	ls->size--;
+	
+	/* Shift everything to the left by one */
+	for (index = 1; index < ls->size; index++) {
+		ls->sortedList[index] = ls->sortedList[index - 1];
+	} 
+	
+	/* Return the minimum number */
+	return minNum; 
 }
 
 /**
