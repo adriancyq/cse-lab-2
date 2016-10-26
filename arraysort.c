@@ -126,6 +126,9 @@ int pop_min(list *ls){
  * 1 4 6 7 8
  */
 void print(list *ls){
+	for (int index = 0; index < ls->size; index++){
+	printf ("print %d \n", ls->sortedList[index]);
+	}
 }
 
 /**
