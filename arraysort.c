@@ -9,15 +9,14 @@
  */
 list* createlist(int maxElements)
 {	
-	/* Determine how many bytes we need */
-	int allocateSize = maxElements + 2;
 
 	/* Allocate spcace for list */
-	list * listPointer = malloc((allocateSize) * sizeof(int));
+	list * listPointer = malloc(sizeof(list));
 	
 	/* Initialize size and capacity */	
 	listPointer->size = 0;
 	listPointer->maxSize = maxElements;
+	listPointer->sortedList = malloc(sizeof(int) * maxElements);
 	
 	/* return pointer to list */
 	return listPointer;
@@ -60,35 +59,46 @@ int insert(list *ls, int val)
 	}
 
 	/* Insert integer into list */
-	ls->sortedList[(ls->size)] = val;
-	
-	/* Sort list only if it was not previously empty */
-	if ((ls->size) != 0) {
-
-		/* Sort the list */
-		for (index = (ls->size) - 1; index <= 1; index--) {
-			
-			/* Swap elements if one before it is greater */
-			if ((ls->sortedList[index]) < (ls->sortedList[index - 1])) {
-				tempNum = ls->sortedList[index - 1];
-				ls->sortedList[index - 1] = ls->sortedList[index];
-				ls->sortedList[index] = tempNum;
-				break;
-			}
-			
-			/* If element is the same as one before, stay */
-			if ((ls->sortedList[index]) == (ls->sortedList[index - 1])) {
-				break;
-			}
-		}
-	}
+	ls->sortedList[ls->size] = val;
 
 	/* Update list element counter */
 	ls->size++;
 
-	/* Return index where we inserted the element */
-	return index;
+	/* Check to see if we need to sort */
+	if (ls->size == 1) {
 
+		/* Element we added was the first, no need to sort */
+		return 0;
+	}
+
+	/* List was previously populated, may need sorting */
+	else {
+
+		/* Iterate through list backwad */
+		for (index = (ls->size) - 1; index >= 1; index --) {
+
+			/* Found an element to the left that is bigger */
+			if (ls->sortedList[index] < ls->sortedList[index - 1]) {
+
+				/* save previous element */
+				tempNum = ls->sortedList[index - 1];
+
+				/* Overrwrite previous element and swap */
+				ls->sortedList[index - 1] = ls->sortedList[index];
+				ls->sortedList[index] = tempNum;
+
+			}
+
+			/* Found an element to the left that is smaller, stop sorting */
+			else if (ls->sortedList[index] >= ls->sortedList[index - 1]) {
+				break;
+			}
+		}
+
+		/* Return the index of the sorted element */
+		return index;
+
+	}
 }
 
 
