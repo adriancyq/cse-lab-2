@@ -35,7 +35,7 @@ list* createlist(int maxElements)
  */
 int insert(list *ls, int val)
 {
-	list * doubledList;
+	void * doubledSortedList;
 	int tempNum, index;
 
 	/* Check that the pointer points to something */
@@ -45,16 +45,16 @@ int insert(list *ls, int val)
 	
 	/* Check if the list is full */
 	if ((ls->size) == (ls->maxSize)) {
-		doubledList = realloc(ls, (ls->maxSize * 2) + 2);
+		doubledSortedList = realloc(ls->sortedList, (ls->maxSize * 2));
 		
 		/* Check if we reallocated memory successfully */
-		if (doubledList == NULL) {
+		if (doubledSortedList == NULL) {
 			return -1;
 		}
 		
 		/* Update the pointer to point to new list */
 		else {
-			ls = doubledList;
+			ls->sortedList = doubledSortedList;
 		}
 	}
 
