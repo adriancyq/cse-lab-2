@@ -36,6 +36,49 @@ list* createlist(int maxElements)
  */
 int insert(list *ls, int val)
 {
+	list * doubledList;
+	int currentNum, tempNum, index;
+
+	/* Check that the pointer points to something */
+	if (ls == NULL) {
+		return -1;
+	}
+	
+	/* Check if the list is full */
+	if (ls->size == ls->maxSize) {
+		doubledList = realloc(ls, (ls->maxSize * 2) + 2);
+		
+		/* Check if we reallocated memory successfully */
+		if (doubledList == NULL) {
+			return -1;
+		}
+		
+		/* Update the pointer to point to new list */
+		else {
+			ls = doubledList;
+		}
+	}
+
+	/* Insert integer into list */
+	ls->sortedList[ls->size] = val;
+	
+	/* Sort the list */
+	for (index = ls->size - 1; index <= 1; index = index - 1) {
+		
+		/* Swap elements if one before it is greater */
+		if (ls->sortedList[index] < ls->sortedList[index - 1]) {
+			tempNum = ls->sortedList[index - 1];
+			ls->sortedList[index - 1] = ls->sortedList[index];
+			ls->sortedList[index] = tempNum;
+			break;
+		}
+	}
+	
+	/* Update list element counter */
+	ls->size++;
+
+	/* Return index where we inserted the element */
+	return index;
 
 }
 
