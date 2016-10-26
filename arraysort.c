@@ -37,7 +37,7 @@ list* createlist(int maxElements)
 int insert(list *ls, int val)
 {
 	list * doubledList;
-	int currentNum, tempNum, index;
+	int tempNum, index;
 
 	/* Check that the pointer points to something */
 	if (ls == NULL) {
@@ -45,7 +45,7 @@ int insert(list *ls, int val)
 	}
 	
 	/* Check if the list is full */
-	if (ls->size == ls->maxSize) {
+	if ((ls->size) == (ls->maxSize)) {
 		doubledList = realloc(ls, (ls->maxSize * 2) + 2);
 		
 		/* Check if we reallocated memory successfully */
@@ -60,25 +60,29 @@ int insert(list *ls, int val)
 	}
 
 	/* Insert integer into list */
-	ls->sortedList[ls->size] = val;
+	ls->sortedList[(ls->size)] = val;
 	
-	/* Sort the list */
-	for (index = ls->size - 1; index <= 1; index = index - 1) {
-		
-		/* Swap elements if one before it is greater */
-		if (ls->sortedList[index] < ls->sortedList[index - 1]) {
-			tempNum = ls->sortedList[index - 1];
-			ls->sortedList[index - 1] = ls->sortedList[index];
-			ls->sortedList[index] = tempNum;
-			break;
-		}
-		
-		/* If element is the same as one before, stay */
-		if (ls->sortedList[index] == ls->sortedList[index - 1]) {
-			break;
+	/* Sort list only if it was not previously empty */
+	if ((ls->size) != 0) {
+
+		/* Sort the list */
+		for (index = (ls->size) - 1; index <= 1; index--) {
+			
+			/* Swap elements if one before it is greater */
+			if ((ls->sortedList[index]) < (ls->sortedList[index - 1])) {
+				tempNum = ls->sortedList[index - 1];
+				ls->sortedList[index - 1] = ls->sortedList[index];
+				ls->sortedList[index] = tempNum;
+				break;
+			}
+			
+			/* If element is the same as one before, stay */
+			if ((ls->sortedList[index]) == (ls->sortedList[index - 1])) {
+				break;
+			}
 		}
 	}
-	
+
 	/* Update list element counter */
 	ls->size++;
 
@@ -97,6 +101,7 @@ int insert(list *ls, int val)
  */
 int remove_val(list *ls, int val)
 {
+	return -1;
 }
 
 
@@ -107,6 +112,7 @@ int remove_val(list *ls, int val)
  */
 int get_max_value(list *ls)
 {
+	return -1;
 }
 
 /**
@@ -114,6 +120,7 @@ int get_max_value(list *ls)
  * the list OR -1 if the list is empty.
  */
 int get_min_value(list *ls){
+	return -1;
 }
 
 /**
@@ -168,7 +175,7 @@ int pop_min(list *ls){
  */
 void print(list *ls){
 	for (int index = 0; index < ls->size; index++){
-	printf ("print %d \n", ls->sortedList[index]);
+	printf ("%d ", ls->sortedList[index]);
 	}
 }
 
