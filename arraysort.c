@@ -2,6 +2,7 @@
 #include <stdlib.h>
 
 #include "arraysort.h"
+
 /**
  * This function creates an empty list, with space allocated for an array of
  * maxElements ints (pointed to by int *sortedList) and returns a pointer to the
@@ -22,6 +23,8 @@ list* createlist(int maxElements)
 	return listPointer;
 
 }
+
+
 
 /**
  * This function takes a pointer to the list and an integer value as input. It
@@ -112,7 +115,40 @@ int insert(list *ls, int val)
  */
 int remove_val(list *ls, int val)
 {
-	return -1;
+	int numRemoved;				/* Number of elements removed */
+	int firstRemoveIndex;		/* Index of first element to remove */
+	int lastRemoveIndex;		/* Index of last element to remove */
+	int index; 					/* Index of current element */
+
+	numRemoved = 0;
+
+	/* Find the total number of occurrences of val */
+	for (index = 0; index < ls->size; index++) {
+
+		/* Check if current value is the one we need to delete */
+		if (ls->sortedList[index] == val) {
+
+			/* Keep track of index of first occurrence of val */
+			firstRemoveIndex = index;
+
+			/* Keep track of how many occurrences of val we have seen */
+			numRemoved++;
+		}
+	}
+
+	/* Determine the index of the last element to be removed */
+	lastRemoveIndex = firstRemoveIndex + numRemoved - 1;
+
+	/* Shift the list to the left by however many elements we deleted */
+	for (index = lastRemoveIndex + 1; index < ls->size; index++) {
+		ls->sortedList[index - numRemoved] = ls->sortedList[index];
+	}
+
+	/* Change size */
+	ls->size = ls->size - numRemoved;
+
+	/* Return the number of elements deleted */
+	return numRemoved;
 }
 
 
@@ -122,24 +158,46 @@ int remove_val(list *ls, int val)
  * maximum value in the list OR -1 if the list is empty.
  */
 int get_max_value(list *ls)
-{
-	return -1;
+{	
+	/* Check if the list is empty */
+	if (ls->size == 0) {
+		return -1;
+	}
+
+	/* List is not empty, get the last element */
+	else {
+		return ls->sortedList[(ls->size) - 1];
+	}
 }
+
+
 
 /**
  * This function takes a pointer to the list and returns the minimum value in
  * the list OR -1 if the list is empty.
  */
 int get_min_value(list *ls){
-	return -1;
+	
+	/* Check if the list is empty */
+	if (ls->size == 0) {
+		return -1;
+	}
+
+	/* List is not empty, get the first element */
+	else {
+		return ls->sortedList[0];
+	}
 }
+
+
 
 /**
  * This function returns the index of the first occurrence of 'val' in the
  * list. It returns -1 if the value 'val' is not present in the list.
  */
-int search(list *ls, int val){
-	int index;
+int search(list *ls, int val)
+{
+	int index;						/* Index of current element */
 	
 	/* Iterate through the array */
 	for (index = 0; index < ls->maxSize; index = index + 1) {
@@ -152,13 +210,17 @@ int search(list *ls, int val){
 	return -1;
 }
 
+
+
 /**
  * This function returns the minimum value from the list and removes it from the
  * list. It returns -1 if the list is empty.
  */
-int pop_min(list *ls){
+int pop_min(list *ls)
+{
 
-	int minNum, index;
+	int minNum;						/* Smallest element in list */
+	int index;						/* Index of current element */
 	
 	/* Check if the list is empty */
 	if (ls->size == 0) {
@@ -180,21 +242,31 @@ int pop_min(list *ls){
 	return minNum; 
 }
 
+
+
 /**
  * This function print the contents of the sorted list on a single line as follows:
  * 1 4 6 7 8
  */
 void print(list *ls){
-	for (int index = 0; index < ls->size; index++){
-	printf ("%d ", ls->sortedList[index]);
+	int index; 						/* Index of current element */
+
+	for (index = 0; index < ls->size; index++){
+
+		/* Print one element at a time */
+		printf ("%d ", ls->sortedList[index]);
 	}
 }
+
+
 
 /**
  * Identical to get_min_value(), but implemented in ARM assembly
  * (use given file get_min_ARM.s)
  */
 int get_min_ARM(list *ls);
+
+
 
 /**
  * Identical to get_max_value(), but implemented in ARM assembly
