@@ -29,6 +29,8 @@ int main(void)
 	/* Create new list */
 	list * testList = createlist(5);
 
+
+
 	/* BEGIN INSERT: Insert elements to completely fill the list */
 	insert(testList, 1);
 	insert(testList, 2);
@@ -49,6 +51,8 @@ int main(void)
 	/* END INSERT: Finished test cases for insert */
 	printf("Passed test cases for insert.\n");
 
+
+
 	/* BEGIN REMOVE_VAL: testing deletion of multiple elements */
 	insert(testList, 6);
 
@@ -65,6 +69,7 @@ int main(void)
 
 	/* END REMOVE_VAL: Finished tests for remove_val */
 	printf("Passed test cases for remove_val.\n");
+
 
 
 	/* BEGIN GET_MAX_VALUE: list is 1, 2, 3 */
@@ -85,13 +90,17 @@ int main(void)
 	/* END GET_MAX_VALUE */
 	printf("Passed test cases for get_max_value.\n");
 
-	/* Delete a single element in the front of the list...POPMIN*/
-	printf("Deleting single element from front of list...\n");
-	pop_min(testList);
 
-	/*Print new list after single front element removal*/
+
+	/* BEGIN POP_MIN: list is 1 */
+	insert(testList, 1);
 	assert(pop_min(testList) == 1);
-	print(testList);
+
+	/* List is empty, return -1 */
+	assert(pop_min(testList) == -1);
+
+	/* END POP_MIN */
+	printf("Passed test cases for pop_min.\n");
 
 
 
