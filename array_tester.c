@@ -28,7 +28,7 @@ int main(void)
 	/* Create new list */
 	list * testList = createlist(5);
 
-	/* Insert elements to completely fill the list */
+	/* BEGIN INSERT: Insert elements to completely fill the list */
 	insert(testList, 1);
 	insert(testList, 2);
 	insert(testList, 3);
@@ -45,33 +45,42 @@ int main(void)
 		assert(testList->sortedList[index] == (index + 1));
 	}
 
-	/* Finished test cases for insert */
+	/* END INSERT: Finished test cases for insert */
 	printf("Passed test cases for insert.\n");
 
-	/* Testing remove_val */
+	/* BEGIN REMOVE_VAL */
 	remove_val(testList, 6);
 	remove_val(testList, 4);
 	remove_val(testList, 5);
 
-	/* List should now include 1 to 3 */
+	/* List is 1, 2, 3 */
 	assert(testList->size == afterRemoveVal);
 	for (index = 0; index < testList->size; index++) {
 		assert(testList->sortedList[index] == index + 1);
 	}
 
-	/* Finished tests for remove_val */
+	/* END REMOVE_VAL: Finished tests for remove_val */
 	printf("Passed test cases for remove_val.\n");
 
+	/* BEGIN GET_MAX_VALUE: list is 1, 2, 3 */
+	assert(get_max_value(testList) == 3);
+	remove_val(testList, 3);
+
+	/* list is now 1, 2 */
+	assert(get_max_value(testList) == 2);
+	remove_val(testList, 2);
+
+	/* list is now 1 */
+	assert(get_max_value(testList) == 1);
+	remove_val(testList, 1);
+
+	/* list is now empty, return -1 */
+	assert(get_max_value(testList) == -1);
+
+	/* END GET_MAX_VALUE */
+	printf("Passed test cases for get_max_value.\n");
 
 
-	/* TODO Delete a single element in the front of the list */
-
-	/* Delete a single element in the middle of the list */
-	printf("Deleting an element...\n");
-	assert(remove_val(testList, 2) == 1);
-	print(testList);
-
-	/* TODO Delete a single element in the back of the list */
 
 	/* TODO Delete multiple elements */
 
