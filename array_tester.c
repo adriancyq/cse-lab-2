@@ -20,9 +20,12 @@ Description:	Creates a new list of capcity five. Inserts 6 elements into
 int main(void)
 {	
 	int numElements = 5;					/* Initial list capacity */
+	int index;								/* Index of current element */
+	int newListSize = numElements * 2;		/* Double original capacity */
+	int size = 6;							/* Size after adding 6 elements */
+	int afterRemoveVal = 3;					/* List length after removing 3 */
 
 	/* Create new list */
-	printf("Creating list to hold %d elements\n", numElements);
 	list * testList = createlist(5);
 
 	/* Insert elements to completely fill the list */
@@ -31,11 +34,35 @@ int main(void)
 	insert(testList, 3);
 	insert(testList, 4);
 	insert(testList, 6); 	
-
-	/* Sort and increase size of list */
 	insert(testList, 5);
-	printf("The list contains...\n");
-	print(testList);
+
+	/* Check that we have doubled the list size and there are 6 elements*/
+	assert(testList->maxSize == newListSize);
+	assert(testList->size == size);
+
+	/* Check that the elements are in order */
+	for (index = 0; index < testList->size; index++) {
+		assert(testList->sortedList[index] == (index + 1));
+	}
+
+	/* Finished test cases for insert */
+	printf("Passed test cases for insert.\n");
+
+	/* Testing remove_val */
+	remove_val(testList, 6);
+	remove_val(testList, 4);
+	remove_val(testList, 5);
+
+	/* List should now include 1 to 3 */
+	assert(testList->size == afterRemoveVal);
+	for (index = 0; index < testList->size; index++) {
+		assert(testList->sortedList[index] == index + 1);
+	}
+
+	/* Finished tests for remove_val */
+	printf("Passed test cases for remove_val.\n");
+
+
 
 	/* TODO Delete a single element in the front of the list */
 
