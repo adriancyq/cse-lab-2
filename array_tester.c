@@ -48,7 +48,10 @@ int main(void)
 	/* END INSERT: Finished test cases for insert */
 	printf("Passed test cases for insert.\n");
 
-	/* BEGIN REMOVE_VAL */
+	/* BEGIN REMOVE_VAL: testing deletion of multiple elements */
+	insert(testList, 6);
+
+	/* Should delete two instances of 6 */
 	remove_val(testList, 6);
 	remove_val(testList, 4);
 	remove_val(testList, 5);
