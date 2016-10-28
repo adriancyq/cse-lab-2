@@ -1,6 +1,7 @@
 /****************************************************************************
 													Jonathan Chiu, A12113428
-													Adrian Cordova
+													Adrian Cordova y Quiroz
+													A12010305
 													10/27/2016
 													Fall 2016
 													CSE30	
@@ -65,6 +66,7 @@ int main(void)
 	/* END REMOVE_VAL: Finished tests for remove_val */
 	printf("Passed test cases for remove_val.\n");
 
+
 	/* BEGIN GET_MAX_VALUE: list is 1, 2, 3 */
 	assert(get_max_value(testList) == 3);
 	remove_val(testList, 3);
@@ -83,11 +85,21 @@ int main(void)
 	/* END GET_MAX_VALUE */
 	printf("Passed test cases for get_max_value.\n");
 
+	/* Delete a single element in the front of the list...POPMIN*/
+	printf("Deleting single element from front of list...\n");
+	pop_min(testList);
+
+	/*Print new list after single front element removal*/
+	assert(pop_min(testList) == 1);
+	print(testList);
+
+
 
 
 	/* TODO Delete multiple elements */
 
 	/* TODO Delete from an empty list, return 0 */
+
 
 
     return 0;
