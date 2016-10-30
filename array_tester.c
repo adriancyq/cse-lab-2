@@ -52,7 +52,6 @@ int main(void)
 	printf("Passed test cases for insert.\n");
 
 
-
 	/* BEGIN REMOVE_VAL: testing deletion of multiple elements */
 	insert(testList, 6);
 
@@ -69,7 +68,6 @@ int main(void)
 
 	/* END REMOVE_VAL: Finished tests for remove_val */
 	printf("Passed test cases for remove_val.\n");
-
 
 
 	/* BEGIN GET_MAX_VALUE: list is 1, 2, 3 */
@@ -91,7 +89,6 @@ int main(void)
 	printf("Passed test cases for get_max_value.\n");
 
 
-
 	/* BEGIN POP_MIN: list is 1 */
 	insert(testList, 1);
 	assert(pop_min(testList) == 1);
@@ -102,13 +99,35 @@ int main(void)
 	/* END POP_MIN */
 	printf("Passed test cases for pop_min.\n");
 
+	/*BEGIN SEARCH: list is 1, 2, 3*/
+	insert(testList, 3);
+	insert(testList, 2);
+	insert(testList, 1);
+	assert(search(testList, 3) == 3);
 
+	/*END SEARCH*/
+	printf("Passed test cases for search.\n");
 
+	/* BEGIN GET_MIN_VALUE: list is 1, 2, 3 */
+	insert(testList, 3);
+	insert(testList, 2);
+	insert(testList, 1);
+	assert(get_min_value(testList) == 3);
+	remove_val(testList, 3);
 
-	/* TODO Delete multiple elements */
+	/* list is now 1, 2 */
+	assert(get_min_value(testList) == 2);
+	remove_val(testList, 2);
 
-	/* TODO Delete from an empty list, return 0 */
+	/* list is now 1 */
+	assert(get_min_value(testList) == 1);
+	remove_val(testList, 1);
 
+	/* list is now empty, return -1 */
+	assert(get_min_value(testList) == -1);
+
+	/* END GET_MAX_VALUE */
+	printf("Passed test cases for get_min_value.\n");
 
 
     return 0;
