@@ -100,9 +100,7 @@ int main(void)
 	printf("Passed test cases for pop_min.\n");
 
 	/*BEGIN SEARCH: list is 1, 2, 3*/
-	insert(testList, 3);
-	insert(testList, 2);
-	insert(testList, 1);
+	
 	assert(search(testList, 3) == 3);
 	assert(search(testList, 2) == 2);
 	assert(search(testList, 1) == 1);
@@ -111,9 +109,7 @@ int main(void)
 	printf("Passed test cases for search.\n");
 
 	/* BEGIN GET_MIN_VALUE: list is 1, 2, 3 */
-	insert(testList, 3);
-	insert(testList, 2);
-	insert(testList, 1);
+	
 	assert(get_min_value(testList) == 3);
 	remove_val(testList, 3);
 
