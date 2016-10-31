@@ -21,7 +21,7 @@ Description:	Creates a new list of capcity five. Inserts 6 elements into
 int main(void)
 {	
 	int numElements = 5;					/* Initial list capacity */
-	int index;								/* Index of current element */
+	//int index;								/* Index of current element */
 	int newListSize = numElements * 2;		/* Double original capacity */
 	int size = 6;							/* Size after adding 6 elements */
 	int afterRemoveVal = 3;					/* List length after removing 3 */
@@ -44,7 +44,7 @@ int main(void)
 	assert(testList->size == size);
 
 	/* Check that the elements are in order */
-	for (index = 0; index < testList->size; index++) {
+	for (int index = 0; index < testList->size; index++) {
 		assert(testList->sortedList[index] == (index + 1));
 	}
 
@@ -62,7 +62,7 @@ int main(void)
 
 	/* List is 1, 2, 3 */
 	assert(testList->size == afterRemoveVal);
-	for (index = 0; index < testList->size; index++) {
+	for (int index = 0; index < testList->size; index++) {
 		assert(testList->sortedList[index] == index + 1);
 	}
 
@@ -100,31 +100,31 @@ int main(void)
 	printf("Passed test cases for pop_min.\n");
 
 	/*BEGIN SEARCH: list is 1, 2, 3*/
-	
-	assert(search(testList, 3) == 3);
-	assert(search(testList, 2) == 2);
-	assert(search(testList, 1) == 1);
+	insert(testList, 3);
+	insert(testList, 2);
+	insert(testList, 1);
+	assert(search(testList, 3) == 2);
+	assert(search(testList, 2) == 1);
+	assert(search(testList, 1) == 0);
 
 	/*END SEARCH*/
 	printf("Passed test cases for search.\n");
 
 	/* BEGIN GET_MIN_VALUE: list is 1, 2, 3 */
-	
-	assert(get_min_value(testList) == 3);
-	remove_val(testList, 3);
 
-	/* list is now 1, 2 */
-	assert(get_min_value(testList) == 2);
-	remove_val(testList, 2);
-
-	/* list is now 1 */
 	assert(get_min_value(testList) == 1);
 	remove_val(testList, 1);
 
+	/* list is now 2, 3 */
+	assert(get_min_value(testList) == 2);
+	remove_val(testList, 2);
+
+	/* list is now 3 */
+	assert(get_min_value(testList) == 3);
+	remove_val(testList, 3);
+
 	/* list is now empty, return -1 */
 	assert(get_min_value(testList) == -1);
-	assert(get_min_value(testList) == 1);
-	assert(get_min_value(testList) == 3);
 
 	/* END GET_MIN_VALUE */
 	printf("Passed test cases for get_min_value.\n");
