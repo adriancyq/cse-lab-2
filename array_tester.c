@@ -104,6 +104,8 @@ int main(void)
 	insert(testList, 2);
 	insert(testList, 1);
 	assert(search(testList, 3) == 3);
+	assert(search(testList, 2) == 2);
+	assert(search(testList, 1) == 1);
 
 	/*END SEARCH*/
 	printf("Passed test cases for search.\n");
@@ -125,8 +127,10 @@ int main(void)
 
 	/* list is now empty, return -1 */
 	assert(get_min_value(testList) == -1);
+	assert(get_min_value(testList) == 1);
+	assert(get_min_value(testList) == 3);
 
-	/* END GET_MAX_VALUE */
+	/* END GET_MIN_VALUE */
 	printf("Passed test cases for get_min_value.\n");
 
 
