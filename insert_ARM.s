@@ -15,37 +15,12 @@ insert_ARM:
     @-----------------------
 
     @ TODO If list struct address is 0, return -1
-    CMP R0, #0
-    BEQ nullList
-
-    @ Store list struct address
-    MOV R11, R0 
 
     @ Get the size (R4), capacity (R5) and sortedlist address (R6)
     LDR R4, [R0, #4]
     LDR R5, [R0, #8]
     LDR R6, [R0]
 
-    @ TODO If the list is full, double the size 
-    CMP R4, R5
-
-    @ Store doubled list capacity in R1 and sortedList pointer in R0 for realloc
-    MOV R0, R6
-    LSL R4, R4, #2
-    MOV R1, R4
-
-    @ Double the size of the list, address should be in R0
-    BL realloc
-
-    @ Check that reallocation was successful
-    CMP R0, #0
-    BEQ nullList
-
-    @ Update capacity and sortedList pointer (now at R6)
-    STR R4, [R11, #8]
-    STR R0, [R11]
-    MOV R6, R0 
-    
     @ Insert the value into the next available position
     STR R1, [R6, R4, LSL #2]
 
@@ -82,12 +57,6 @@ forloop:
 
     @ Restart the loop
     B forloop
-
-nullList:
-    
-    @ Create -1 in two's complement to return
-    MVN R4, #0
-    ADD R4, R4, #1
 
 endfor:
 endif:  
