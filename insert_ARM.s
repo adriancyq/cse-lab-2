@@ -30,11 +30,42 @@ insert_ARM:
     ADD R4, R4, #1
     STR R4, [R0, #4]
 
-    @ TODO Sort the list 
+    @ Get the index of the last element in the list 
+    SUB R4, R4, #1
 
+
+forloop: 
+    
+    @ Compare index (R4) with 1, continue until index is less than 1
+    CMP R4, #1
+    BLT endfor 
+
+    @ Grab the element at index (R7), and the one before (R9)
+    LDR R7, [R6, R4]
+    SUB R8, R4, #1
+    LDR R9, [R6, R8]
+
+    @ Compare the element at index (R7), and the one before (R9)
+    CMP R7, R9 
+
+    @ If the current one is less than the one before, switch them
+    BGE endif 
+
+    @ Swap one before with current 
+    STR R9, [R6, R4]
+    STR R7, [R6, R8]
+
+    @ Update index
+    ADD R7, R7, #1
+
+    @ Restart the loop
+    B forloop:
+
+endfor:
+endif:  
 
     @ put your return value in r0 here:
-
+    MOV R0, R7
     @-----------------------
 
     @ restore caller's registers
