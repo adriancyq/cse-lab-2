@@ -13,11 +13,35 @@ createlist_ARM:
 
     @ YOUR CODE GOES HERE (int maxElements is in r0)
     @-----------------------
+    
+    @ Store maxElements in another register
+    MOV R11, R0 
 
-    @ (your code)
+    @ Allocate three 4-byte blocks for List struct, address should be in R0
+    MOV R0, #12
+    BL malloc 
 
-    @ put your return value in r0 here:
+    @ Initialize size and capacity 
+    MOV R4, #0
+    STR R4, [R0, #4]
+    STR R11, [R0, #8]
 
+    @ Store address of List struct 
+    MOV R10, R0 
+
+    @ Determine number of bytes needed for sorted list 
+    ASR R11, R11, #2
+
+    @ Allocate (maxElements) 4-byte blocks for sortedlist, address should be
+    @ in R0
+    MOV R0, R11
+    BL malloc 
+
+    @ Store address of sortedlist into List struct 
+    STR R0, [R10]
+
+    @ Return address of List struct in R0
+    MOV R0, R10
     @-----------------------
 
     @ restore caller's registers
