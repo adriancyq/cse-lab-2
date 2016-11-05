@@ -3,13 +3,11 @@
  * DO NOT CHANGE any of the function signatures
  */
 
-#ifndef _ARM_HEADER_GUARD_
 struct List {
     int* sortedList;
     int size;
     int maxSize;
 };
-#endif
 
 typedef struct List list;
 
@@ -40,7 +38,6 @@ int insert_ARM(list *ls, int val);
  */
 int remove_val_ARM(list *ls, int val);
 
-#ifndef _ARM_HEADER_GUARD_
 /**
  * This function takes a pointer to the the list as input and returns the
  * maximum value in the list OR -1 if the list is empty.
@@ -57,7 +54,6 @@ int get_min_ARM(list *ls);
  * This function returns the index of the first occurrence of 'val' in the
  * list. It returns -1 if the value 'val' is not present in the list.
  */
-#endif
 
 int search_ARM(list *ls, int val);
 
