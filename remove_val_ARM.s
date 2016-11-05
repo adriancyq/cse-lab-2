@@ -27,7 +27,7 @@ remove_val_ARM:
     loop1 : CMP r6, r4            @index < ls->size
            BGE end                @end loop
            LSR r6, #2             @multiply index by 4
-           LDR r9,[r0, r6]        @in r9 sortedList[index]
+           LDR r9, [r0, r6]        @in r9 sortedList[index]
            CMP r9 , r1            @ls->sortedList[index]==val
            MOV r7, r6             @firstRemoveIndex is r7 = index
            ADD r5, r5, #1         @numRemoved++ 
@@ -45,7 +45,7 @@ remove_val_ARM:
            BGE end        @end loop
            LSR r6, #2             @multiply index by 4
            SUB r9, r6, r5         @in r9 sortedList[index - numRemoved]
-           LDR r10,[r0, r6]       @in r10 sortedList[index]
+           LDR r10, [r0, r6]       @in r10 sortedList[index]
            CMP r9, r10            @ls->sortedList[index - numRemoved] = ls->sortedList[index];  
            B loop2
     SUB r4, r4, r5          @ls->size = ls->size - numRemoved;
@@ -53,7 +53,6 @@ remove_val_ARM:
     @ put your return value in r0 here:
 
     end : MOV r0, r5     @return numRemoved
-          BX lr
 
     @-----------------------
 
