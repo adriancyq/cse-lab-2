@@ -11,11 +11,11 @@ int main(void)
     list * testList = createlist_ARM(5);
 
     /* BEGIN INSERT: Insert elements to completely fill the list */
-    printf("Element %d at index %d.\n", 5, insert_ARM(testList, 5);
-    printf("Element %d at index %d.\n", 4, insert_ARM(testList, 4);
-    printf("Element %d at index %d.\n", 3, insert_ARM(testList, 3);
-    printf("Element %d at index %d.\n", 2, insert_ARM(testList, 2);
-    printf("Element %d at index %d.\n", 1, insert_ARM(testList, 1);
+    printf("Element %d at index %d.\n", 5, insert_ARM(testList, 5));
+    printf("Element %d at index %d.\n", 4, insert_ARM(testList, 4));
+    printf("Element %d at index %d.\n", 3, insert_ARM(testList, 3));
+    printf("Element %d at index %d.\n", 2, insert_ARM(testList, 2));
+    printf("Element %d at index %d.\n", 1, insert_ARM(testList, 1));
 
     assert(testList->sortedList[0] == 1);
     assert(testList->sortedList[1] == 2);

@@ -114,7 +114,7 @@ sortLoop:
 end:
 
     @ put your return value in r0 here:
-    
+    MOV R0, R7
     @-----------------------
 
     @ restore caller's registers
