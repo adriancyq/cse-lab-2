@@ -53,11 +53,11 @@ insert_ARM:
     BNE listNotEmpty
 
     @ List is full, so we need to double space and convert to bytes
-    LSL R5, R5, #1
-    LSL R5, R5, #2
+    LSL R6, R5, #2
+    LSL R5, R6, #1
 
     @ Fill parameters of realloc, address of memory location and size
-    MOV R0, R5 
+    MOV R0, R4
     MOV R1, R5 
     BL realloc 
 
@@ -69,9 +69,12 @@ insert_ARM:
     @ Update address of sortedList in register
     MOV R4, R0 
 
-    @ Update new list properties: sortedList address and size
+    @ Update new list properties: sortedList address and maxSize
     STR R4, [R9]
-    STR R5, [R9, #4]
+    STR R6, [R9, #8]
+
+    @ Restore size
+    ASR R5, R6, #1
 
 
 
