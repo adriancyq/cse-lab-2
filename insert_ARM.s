@@ -37,6 +37,7 @@ insert_ARM:
 
     @ Store the address of our list struct in another register 
     MOV R9, R0 
+    MOV R10, R1
 
     @ Grab sortedList address, size, and capacity 
     LDR R4, [R9]
@@ -53,8 +54,8 @@ insert_ARM:
     BNE listNotEmpty
 
     @ List is full, so we need to double space and convert to bytes
-    LSL R6, R5, #2
-    LSL R5, R6, #1
+    LSL R6, R5, #1
+    LSL R5, R6, #2
 
     @ Fill parameters of realloc, address of memory location and size
     MOV R0, R4
@@ -81,7 +82,7 @@ insert_ARM:
 listNotEmpty:
     
     @ Insert the element into the list 
-    STR R1, [R4, R7, LSL #2]
+    STR R10, [R4, R7, LSL #2]
 
     @ Increment the list size 
     ADD R5, R5, #1 
@@ -92,26 +93,26 @@ listNotEmpty:
 sortLoop: 
     
     @ Iterate through list backward, stop at second element 
-    CMP R7, #1
-    ADDLT R0, R7, #1
-    BLT end 
+    @CMP R7, #1
+    @ADDLT R0, R7, #1
+    @BLT end 
 
     @ Grab the current element and the one before it 
-    LDR R10, [R4, R7, LSL #2]
-    SUB R8, R7, #1
-    LDR R11, [R4, R8, LSL #2]
+    @LDR R10, [R4, R7, LSL #2]
+    @SUB R8, R7, #1
+    @LDR R11, [R4, R8, LSL #2]
 
     @ Compare the element at current index to the one before 
-    CMP R10, R11 
-    BGE end 
+    @CMP R10, R11 
+    @BGE end 
 
     @ Switch the two elements
-    STR R10, [R4, R8, LSL #2]
-    STR R11, [R4, R7, LSL #2]
+    @STR R10, [R4, R8, LSL #2]
+    @STR R11, [R4, R7, LSL #2]
 
     @ Update the index and go back to beginning 
-    SUB R7, R7, #1 
-    B sortLoop 
+    @SUB R7, R7, #1 
+    @B sortLoop 
 
 
 end:
