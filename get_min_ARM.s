@@ -14,9 +14,22 @@ get_min_ARM:
     @ YOUR CODE GOES HERE (list *ls is in r0)
     @-----------------------
 
-    @ (your code)
+    LDR r4, [r0, #4] @accesing size from struct
+    LDR r5, [r0]     @address that holds the first element
+    CMP r4, #0       @ls->size == 0
+    BNE notEqual
+    MOV r0, #-1     @return -1
+    B end
 
-    @ put your return value in r0 here:    
+    notEqual: 
+        LDR r6, [r5] 
+        MOV r0, r6  
+
+    end: 
+
+    @ put your return value in r0 here:  
+
+    mov r0,r0  
 
     @-----------------------
 
