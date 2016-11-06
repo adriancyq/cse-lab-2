@@ -14,9 +14,30 @@ search_ARM:
     @ YOUR CODE GOES HERE (list *ls is in r0, int val is in r1)
     @-----------------------
 
-    @ (your code)
+    CMP r0, #0
+    MOVEQ r0, #-1
+    BEQ null
+    LDRNE r2, [r0, #4]
+    CMPNE r2, #0
+    MOVEQ r0, #-1
+    BEQ null
+    LDR r3, [r0]
+    MOV r4, #0
+loop:
+    LDR r3, [r3, r4, LSL #2]
+    CMP r3, r1
+    BEQ end
+    ADD r4, r4, #1
+    CMP r4, r2
+    BLT end
+    B loop
 
     @ put your return value in r0 here:
+
+end:
+    MOV r0, r4
+
+null:
 
     @-----------------------
 
