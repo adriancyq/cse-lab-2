@@ -29,7 +29,7 @@ insert_ARM:
     @-----------------------
 
     @ Null check for list struct pointer, return -1
-    CMP R0 #0
+    CMP R0, #0
     SUBEQ R0, R0, #1
     BEQ end
 
@@ -59,7 +59,7 @@ insert_ARM:
     @ Fill parameters of realloc, address of memory location and size
     MOV R0, R5 
     MOV R1, R5 
-    bl realloc 
+    BL realloc 
 
     @ Check that reallocation was successful
     CMP R0, #0
@@ -90,7 +90,7 @@ sortLoop:
     
     @ Iterate through list backward, stop at second element 
     CMP R7, #1
-    MOVLT R0, R7 
+    ADDLT R0, R7, #1
     BLT end 
 
     @ Grab the current element and the one before it 
@@ -114,7 +114,7 @@ sortLoop:
 end:
 
     @ put your return value in r0 here:
-
+    
     @-----------------------
 
     @ restore caller's registers

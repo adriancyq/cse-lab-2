@@ -30,7 +30,7 @@ createlist_ARM:
     MOV R10, R0 
 
     @ Determine number of bytes needed for sorted list 
-    ASR R11, R11, #2
+    LSL R11, R11, #2
 
     @ Allocate (maxElements) 4-byte blocks for sortedlist, address should be
     @ in R0

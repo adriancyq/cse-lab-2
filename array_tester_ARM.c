@@ -11,13 +11,19 @@ int main(void)
     list * testList = createlist_ARM(5);
 
     /* BEGIN INSERT: Insert elements to completely fill the list */
-    insert_ARM(testList, 2);
-    insert_ARM(testList, 1);
+    printf("Element %d at index %d.\n", 5, insert_ARM(testList, 5);
+    printf("Element %d at index %d.\n", 4, insert_ARM(testList, 4);
+    printf("Element %d at index %d.\n", 3, insert_ARM(testList, 3);
+    printf("Element %d at index %d.\n", 2, insert_ARM(testList, 2);
+    printf("Element %d at index %d.\n", 1, insert_ARM(testList, 1);
 
     assert(testList->sortedList[0] == 1);
     assert(testList->sortedList[1] == 2);
+    assert(testList->sortedList[2] == 3);
+    assert(testList->sortedList[3] == 4);
+    assert(testList->sortedList[4] == 5);
     printf("Passed test cases for Insert_ARM.\n");
-    
+
     // /* BEGIN REMOVE_VAL: testing deletion of multiple elements */
     // insert(testList, 6);
 
