@@ -14,9 +14,9 @@ pop_min_ARM:
     @ YOUR CODE GOES HERE (list *ls is in r0)
     @-----------------------
 
-    LDR r5, [r0, #4]       @ls->size
-    CMP r5, #0             @ls->size == 0
-    BNE else               @branch to else
+      LDR r5, [r0, #4]       @ls->size
+      CMP r5, #0             @ls->size == 0
+      BNE else               @branch to else
       MOV r0, #-1          @return -1
       B end                @branch to end
 
