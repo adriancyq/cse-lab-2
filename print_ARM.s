@@ -30,7 +30,11 @@ print_ARM:
     else: LSL r7,r9, #2  @else loop 
     LDR r1, [r10, r7]    
     LDR r0, =mystr
+<<<<<<< HEAD
     BL printf            @calling printf
+=======
+    BL printf
+>>>>>>> 208e777029354c17a8aaefc36c44bfd28018d440
 
     ADD r9, r9, #1       @increment index
     CMP r9, r11          @compare size to index
