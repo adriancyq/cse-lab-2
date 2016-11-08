@@ -48,12 +48,13 @@ loop:
 
 endOfList:
     
+    @ Adjust size 
+    SUB R5, R5, #1
+    STR R5, [R0, #4]
+    
     @ Assign popped value to R0 for return 
     MOV R0, R6
 
-    @ Adjust the size 
-    ADD R5, R5, #1
-    STR R5, [R0, #4]
 
 emptyList:
 
