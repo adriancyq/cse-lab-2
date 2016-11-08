@@ -1,7 +1,7 @@
 .syntax unified
 
 .data
-mystr : .asciz"%d " @store string into registers
+mystr : .asciz"%d " @stores the strings into the registers
 
 .text
 
@@ -18,26 +18,22 @@ print_ARM:
     @ YOUR CODE GOES HERE (list *ls is in r0)
     @-----------------------
 
-    LDR r5, [r0, #4] @size
-    LDR r6, [r0]     @sortedList
-    MOV r7, #0
-    SUB r5, r5, #1   @size - 1
+    LDR r11, [r0, #4] @size
+    LDR r10, [r0]     @sortedList
+    MOV r9, #0        @set index to 0
+    SUB r11, r11, #1   @size - 1
 
-    CMP r0, r7       @null  check
+    CMP r0, r9       @null  check
     BNE else
     B end
 
-    @else have loop from i to size-1
-    @arithmetic, get sortedList[i] into
-    @and call printF to print out list
-
-    else: LSL r8,r7, #2
-    LDR r1, [r6, r8] 
+    else: LSL r7,r9, #2  @else loop 
+    LDR r1, [r10, r7]    
     LDR r0, =mystr
-    BL printf
+    BL printf            @calling printf
 
-    ADD r7, r7, #1
-    CMP r7, r5
+    ADD r9, r9, #1       @increment index
+    CMP r9, r11          @compare size to index
     BLE else
     BGE return
 
@@ -45,7 +41,7 @@ print_ARM:
 
     @-----------------------
 
-    end: MVN r0, #0     @if null print -1
+    end: MVN r0, #0     @print negative one if list is null
     return: 
 
     @ restore caller's registers
