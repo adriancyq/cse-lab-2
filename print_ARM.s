@@ -34,7 +34,7 @@ print_ARM:
     else: LSL r8,r7, #2
     LDR r1, [r6, r8] 
     LDR r0, =mystr
-    BL printF
+    BL printf
 
     ADD r7, r7, #1
     CMP r7, r5
