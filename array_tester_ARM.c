@@ -35,7 +35,7 @@ int main(void)
     printf("Search result: %d.\n", search_ARM(testList, 4));
     printf("Search result: %d.\n", search_ARM(testList, 5));
     printf("Search result: %d.\n", search_ARM(testList, 6));
-
+    printf("Pop min: %d.\n", pop_min_ARM(testList));
     printf("Size %d.\n", testList->size);
     printf("MaxElements %d\n", testList->maxSize);
     printf("Element: %d.\n", testList->sortedList[0]);

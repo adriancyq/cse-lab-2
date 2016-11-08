@@ -8,43 +8,57 @@
 .type pop_min_ARM, %function
 
 pop_min_ARM:
+
     @ Save caller's registers on the stack
     push {r4-r11, ip, lr}
 
-    @ YOUR CODE GOES HERE (list *ls is in r0)
+    @ R0: list *ls
     @-----------------------
+    
+    @ Grab the size and the address of sortedList 
+    LDR R4, [R0]                @ address
+    LDR R5, [R0, #4]            @ size
 
-      LDR r5, [r0, #4]       @ls->size
-      CMP r5, #0             @ls->size == 0
-      BNE else               @branch to else
-      MOV r0, #-1          @return -1
-      B end                @branch to end
+    @ Check that the list is not empty 
+    CMP R5, #0
+    MOVEQ R0, #-1
+    BEQ emptyList
 
-else: LDR r4, [r0]         @ls->sortedList[0]
-      LDR r7, [r4]         @loading minNum = sortedList[0] in r7
-      SUB r5,r5, #1        @ls-.size--;
+    @ Grab the first element in the sortedList 
+    LDR R6, [R4]                @ls->sortedList[0]
 
-      MOV r6, #1           @index = 1
+    @ Initialize the index of the for loop 
+    MOV R7, #1
 
-loop:  CMP r6, r5           @index < size
-      BGE end              @index >= size, branch to end and return minNum
-      MOV r8, r6           @putting index in r9
-      SUB r8, r8, #1       @index - 1
-      LDR r9, [r0, r8, LSL #2]     @ls->sortedList[index-1]
-      STR r9, [r0, r6, LSL #2]     @storing value in r9 
-      B loop
+loop:  
+    
+    @ Loop through sortedList
+    CMP R7, R5                  @index < size
+    BEQ endOfList               @index >= size, branch to end and return minNum
 
-    @ put your return value in r0 here:
+    @ Grab the current and previous element 
+    SUB R9, R7, #1              @index - 1
+    LDR R10, [R4, R9, LSL #2]   @l s->sortedList[index-1]
+    LDR R11, [R4, R7, LSL #2]   @ ls->sortedList[index]
+    STR R11, [R4, R9, LSL #2]
 
-    @-----------------------
+    @ Go to next element
+    ADD R7, R7, #1
+    B loop
 
-end: MOV r0, r7
+endOfList:
+    
+    @ Assign popped value to R0 for return 
+    MOV R0, R6
+
+emptyList:
 
     @ restore caller's registers
     pop {r4-r11, ip, lr}
 
     @ ARM equivalent of return
     BX lr
+
 .endfunc
 
 .end
