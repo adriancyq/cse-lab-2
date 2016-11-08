@@ -36,6 +36,15 @@ int main(void)
     printf("Search result: %d.\n", search_ARM(testList, 5));
     printf("Search result: %d.\n", search_ARM(testList, 6));
 
+    printf("Pop: %d.\n", pop_min_ARM(testList));
+    printf("Size %d.\n", testList->size);
+    printf("MaxElements %d\n", testList->maxSize);
+    printf("Element: %d.\n", testList->sortedList[0]);
+    printf("Element: %d.\n", testList->sortedList[1]);
+    printf("Element: %d.\n", testList->sortedList[2]);
+    printf("Element: %d.\n", testList->sortedList[3]);
+    printf("Element: %d.\n", testList->sortedList[4]);
+    
     // /* BEGIN REMOVE_VAL: testing deletion of multiple elements */
     // insert(testList, 6);
 
