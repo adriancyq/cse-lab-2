@@ -8,10 +8,12 @@
 .type createlist_ARM, %function
 
 createlist_ARM:
+
     @ Save caller's registers on the stack
     push {r4-r11, ip, lr}
 
-    @ YOUR CODE GOES HERE (int maxElements is in r0)
+    @ Parameter:
+    @ R0: int maxElements
     @-----------------------
     
     @ Store maxElements in another register
@@ -40,9 +42,9 @@ createlist_ARM:
     @ Store address of sortedlist into List struct 
     STR R0, [R10]
 
+    @-----------------------
     @ Return address of List struct in R0
     MOV R0, R10
-    @-----------------------
 
     @ restore caller's registers
     pop {r4-r11, ip, lr}

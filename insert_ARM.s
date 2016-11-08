@@ -8,6 +8,7 @@
 .type insert_ARM, %function
 
 insert_ARM:
+
     @ Save caller's registers on the stack
     push {r4-r11, ip, lr}
 
@@ -117,10 +118,10 @@ sortLoop:
 
 end:
 
-    @ put your return value in r0 here:
+    @ Put return value in R0
     MOV R0, R7
+    
     @-----------------------
-
     @ restore caller's registers
     pop {r4-r11, ip, lr}
 

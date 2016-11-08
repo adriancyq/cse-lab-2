@@ -12,13 +12,14 @@ search_ARM:
     @ Save caller's registers on the stack
     push {r4-r11, ip, lr}
 
+    @ Parameters
     @ R0: list *ls
     @ R1: int val
     @-----------------------
 
     @ Grab the size and address of the sortedList
-    LDR R4, [R0, #4]        @ size
-    LDR R5, [R0]            @ pointer to array
+    LDR R4, [R0, #4]                    @ size
+    LDR R5, [R0]                        @ address of sortedList
 
     @ Assign an index for a for loop
     MOV R6, #0
@@ -58,10 +59,7 @@ notInArray:
 
 end:
 
-    @ put your return value in r0 here:
-
     @-----------------------
-
     @ restore caller's registers
     pop {r4-r11, ip, lr}
 

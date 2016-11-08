@@ -12,6 +12,7 @@ pop_min_ARM:
     @ Save caller's registers on the stack
     push {r4-r11, ip, lr}
 
+    @ Parameters:
     @ R0: list *ls
     @-----------------------
     
@@ -25,9 +26,9 @@ pop_min_ARM:
     BEQ emptyList
 
     @ Grab the first element in the sortedList 
-    LDR R6, [R4]                @ls->sortedList[0]
+    LDR R6, [R4]                @ ls->sortedList[0]
 
-    @ Initialize the index of the for loop 
+    @ Initialize the index of the for loop to start at second element 
     MOV R7, #1
 
 loop:  
@@ -37,9 +38,8 @@ loop:
     BEQ endOfList               @index >= size, branch to end and return minNum
 
     @ Grab the current and previous element 
-    SUB R9, R7, #1              @index - 1
-    LDR R10, [R4, R9, LSL #2]   @l s->sortedList[index-1]
     LDR R11, [R4, R7, LSL #2]   @ ls->sortedList[index]
+    SUB R9, R7, #1              @ index - 1
     STR R11, [R4, R9, LSL #2]
 
     @ Go to next element
@@ -48,12 +48,12 @@ loop:
 
 endOfList:
     
+    @ Adjust the size 
+    SUB R5, R5, #1
+    STR R5, [R0, #4]
+
     @ Assign popped value to R0 for return 
     MOV R0, R6
-
-    @ Adjust the size 
-    ADD R5, R5, #1
-    STR R5, [R0, #4]
 
 emptyList:
 

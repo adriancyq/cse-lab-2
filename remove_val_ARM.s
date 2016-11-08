@@ -12,13 +12,14 @@ remove_val_ARM:
     @ Save caller's registers on the stack
     push {r4-r11, ip, lr}
 
+    @ Parameters:
     @ R0: list *ls
     @ R1: int val
     @-----------------------
 
-    @ Get the size of the sortedList
-    LDR R4, [R0, #4]
-    LDR R8, [R0]
+    @ Get the size and address of the sortedList
+    LDR R4, [R0, #4]                        @ size
+    LDR R8, [R0]                            @ address
 
     @ Initialize counter for the number of elements to remove
     MOV R5, #0

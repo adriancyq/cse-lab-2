@@ -9,56 +9,54 @@ int main(void)
 {
 	/* Create new list */
     list * testList = createlist_ARM(5);
+    printf("Passed test cases for createlist_ARM.\n");
 
     /* BEGIN INSERT: Insert elements to completely fill the list */
-    printf("Element %d at index %d.\n", 1, insert_ARM(testList, 1));
-    printf("Element %d at index %d.\n", 2, insert_ARM(testList, 2));
-    printf("Element %d at index %d.\n", 3, insert_ARM(testList, 3));
-    printf("Element %d at index %d.\n", 4, insert_ARM(testList, 4));
-    printf("Element %d at index %d.\n", 5, insert_ARM(testList, 5));
-    printf("Element %d at index %d.\n", 6, insert_ARM(testList, 6));
-    
-    printf("Size %d.\n", testList->size);
-    printf("MaxElements %d\n", testList->maxSize);
-    printf("Element: %d.\n", testList->sortedList[0]);
-    printf("Element: %d.\n", testList->sortedList[1]);
-    printf("Element: %d.\n", testList->sortedList[2]);
-    printf("Element: %d.\n", testList->sortedList[3]);
-    printf("Element: %d.\n", testList->sortedList[4]);
-    printf("Element: %d.\n", testList->sortedList[5]);
-    printf("Passed test cases for Insert_ARM.\n");
+    assert(insert_ARM(testList, 6) == 0);
+    assert(insert_ARM(testList, 5) == 0);
+    assert(insert_ARM(testList, 4) == 0);
+    assert(insert_ARM(testList, 3) == 0);
+    assert(insert_ARM(testList, 2) == 0);
 
-    /* Testing Search */
-    printf("Search result: %d.\n", search_ARM(testList, 1));
-    printf("Search result: %d.\n", search_ARM(testList, 2));
-    printf("Search result: %d.\n", search_ARM(testList, 3));
-    printf("Search result: %d.\n", search_ARM(testList, 4));
-    printf("Search result: %d.\n", search_ARM(testList, 5));
-    printf("Search result: %d.\n", search_ARM(testList, 6));
-    printf("Pop min: %d.\n", pop_min_ARM(testList));
-    printf("Size %d.\n", testList->size);
-    printf("MaxElements %d\n", testList->maxSize);
-    printf("Element: %d.\n", testList->sortedList[0]);
-    printf("Element: %d.\n", testList->sortedList[1]);
-    printf("Element: %d.\n", testList->sortedList[2]);
-    printf("Element: %d.\n", testList->sortedList[3]);
-    printf("Element: %d.\n", testList->sortedList[4]);
-    print_ARM(testList);
+    /* Add one more element, so it forces list to resize */
+    assert(insert_ARM(testList, 1) == 0);
+    assert(testList->size == 6);
+    assert(testList->maxSize == 10);
+    printf("Passed test cases for insert_ARM.\n");
 
-    // /* BEGIN REMOVE_VAL: testing deletion of multiple elements */
-    // insert(testList, 6);
+    /* BEGIN SEARCH: should return index of first occurrence of val */
+    assert(search_ARM(testList, 1) == 0);
+    assert(search_ARM(testList, 2) == 1);
+    assert(search_ARM(testList, 3) == 2);
+    assert(search_ARM(testList, 4) == 3);
+    assert(search_ARM(testList, 5) == 4);
+    assert(search_ARM(testList, 6) == 5);
+    printf("Passed test cases for search_ARM.\n");
 
-    // /* Should delete two instances of 6 */
-    // remove_val_ARM(testList, 6);
-    // remove_val_ARM(testList, 4);
-    // remove_val_ARM(testList, 5);
+    /* BEGIN GET_MAX: should return last element in sortedList */
+    assert(get_max_ARM(testList) == 6);
+    printf("Passed test cases for get_max_ARM.\n");
 
-    // /* List is 1, 2, 3 */
-    // assert(testList->size == afterRemoveVal);
-    // for (int index = 0; index < testList->size; index++) {
-    //     assert(testList->sortedList[index] == index + 1);
-    // }
+    /* Begin GET_MIN: should return first element in sortedList */
+    assert(get_min_ARM(testList) == 1);
+    printf("Passed test cases for get_min_ARM.\n");
 
-    /* END REMOVE_VAL: Finished tests for remove_val */
-    //printf("Passed test cases for remove_val_ARM.\n");
+    /* BEGIN POP_MIN: should return and delete first element */
+    assert(pop_min_ARM(testList) == 1);
+    assert(testList->size == 5);
+
+    /* List is now 2 3 4 5 6 */
+    assert(pop_min_ARM(testList) == 2);
+    assert(testList->size == 4);
+    printf("Passed test cases for pop_min_ARM.\n");
+
+    /* BEGIN REMOVE_VAL: List is now 3 4 5 6 6 */
+    insert_ARM(testList, 6);
+    assert(remove_val_ARM(testList, 6) == 2);
+
+    /* List is now 3 4 5 */
+    assert(remove_val_ARM(testList, 3) == 1);
+    assert(testList->size == 2);
+    printf("Passed test cases for remove_val_ARM.\n");
+
 }

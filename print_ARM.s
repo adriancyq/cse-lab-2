@@ -1,7 +1,9 @@
 .syntax unified
 
 .data
-mystr : .asciz"%d " @stores the strings into the registers
+
+@ stores the strings into the data section to be used later
+mystr : .asciz"%d "
 
 .text
 
@@ -10,39 +12,45 @@ mystr : .asciz"%d " @stores the strings into the registers
 .func print_ARM, print_ARM
 .type print_ARM, %function
 
-
 print_ARM:
+
     @ Save caller's registers on the stack
     push {r4-r11, ip, lr}
 
-    @ YOUR CODE GOES HERE (list *ls is in r0)
+    @ Parameters: 
+    @ R0: list *ls
     @-----------------------
 
-    LDR r11, [r0, #4] @size
-    LDR r10, [r0]     @sortedList
-    MOV r9, #0        @set index to 0
-    SUB r11, r11, #1   @size - 1
+    @ Check that we have a valid address for our List struct 
+    CMP R0, #0
+    BEQ return
 
-    CMP r0, r9       @null  check
-    BNE else
-    B end
+    @ Grab the size and the address of sortedList
+    LDR R11, [R0, #4]                       @ size
+    LDR R10, [R0]                           @ sortedList
 
-    else: LSL r7,r9, #2  @else loop 
-    LDR r1, [r10, r7]    
-    LDR r0, =mystr
-    BL printf            @calling printf
+    @ Initialize the index to 0 for the for loop
+    MOV R9, #0
 
-    ADD r9, r9, #1       @increment index
-    CMP r9, r11          @compare size to index
-    BLE else
-    BGE return
+loop:
+    
+    @ Loop through each element in the array
+    CMP R9, R11                             @ Compare index and size
+    BEQ return 
 
-    @ put your return value in r0 here:
+    @ Grab the element at the specified index 
+    LDR R1, [R10, R9, LSL #2]   
 
-    @-----------------------
+    @ Put that element in R0 for printing 
+    LDR R0, =mystr
+    BL printf                               @calling printf
 
-    end: MVN r0, #0     @print negative one if list is null
-    return: 
+    @ Go to the next element in the array
+    ADD R9, R9, #1
+    B loop 
+
+@ Nothing gets returned for print_ARM
+return: 
 
     @ restore caller's registers
     pop {r4-r11, ip, lr}
