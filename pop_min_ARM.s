@@ -26,7 +26,7 @@ else: LDR r4, [r0]         @ls->sortedList[0]
 
       MOV r6, #1           @index = 1
 
-for:  CMP r6, r5           @index < size
+loop:  CMP r6, r5           @index < size
       BGE end              @index >= size, branch to end and return minNum
       MOV r8, r6           @putting index in r9
       SUB r8, r8, #1       @index - 1
