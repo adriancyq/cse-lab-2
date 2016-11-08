@@ -8,36 +8,57 @@
 .type search_ARM, %function
 
 search_ARM:
+
     @ Save caller's registers on the stack
     push {r4-r11, ip, lr}
 
-    @ YOUR CODE GOES HERE (list *ls is in r0, int val is in r1)
+    @ R0: list *ls
+    @ R1: int val
     @-----------------------
 
-    CMP r0, #0
-    MOVEQ r0, #-1
-    BEQ null
-    LDRNE r2, [r0, #4]
-    CMPNE r2, #0
-    MOVEQ r0, #-1
-    BEQ null
-    LDR r3, [r0]
-    MOV r4, #0
-loop:
-    LDR r3, [r3, r4, LSL #2]
-    CMP r3, r1
-    BEQ end
-    ADD r4, r4, #1
-    CMP r4, r2
-    BLT end
-    B loop
+    @ Grab the size and address of the sortedList
+    LDR R4, [R0, #4]        @ size
+    LDR R5, [R0]            @ pointer to array
 
-    @ put your return value in r0 here:
+    @ Assign an index for a for loop
+    MOV R6, #0
+
+iterate:
+
+    @ Iterate through every element in the array until we find the element
+    @ or reach the end of the sortedList
+    CMP R6, R4
+    BEQ notInArray          @ Reached end of list 
+
+    @ Grab the element in the array of specified index 
+    LDR R7, [R5, R6, LSL #2]
+
+    @ Compare the element with the one we want to find 
+    CMP R7, R1
+
+    @ If not equal, then we have not found the element 
+    ADD R6, R6, #1
+    BNE iterate
+
+    @ If equal, we found the element 
+    BEQ foundElement
+
+
+
+foundElement:
+
+    @ Put the index of the element in R0 for return
+    MOV R0, R6
+    B end 
+
+notInArray:
+    
+    @ Return -1 if element is not in list 
+    MOV R0, #-1
 
 end:
-    MOV r0, r4
 
-null:
+    @ put your return value in r0 here:
 
     @-----------------------
 

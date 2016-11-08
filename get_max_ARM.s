@@ -11,21 +11,29 @@ get_max_ARM:
     @ Save caller's registers on the stack
     push {r4-r11, ip, lr}
 
-    @ YOUR CODE GOES HERE (list *ls is in r0)
+    @ R0: list *ls
     @-----------------------
 
-    LDR r4, [r0, #4] @size
-    LDR r5, [r0]     @pointer to array
+    @ Grab the size and the address of the sortedList
+    LDR r4, [r0, #4]        @size
+    LDR r5, [r0]            @pointer to array
 
+    @ Check if the list is empty
     CMP r4, #0
     BNE notEqual
+
+    @ Return -1 if empty
     MOV r0, #-1      @return -1
     B end
 
 notEqual:
-    LSL r4, #2       @multiphy size by 4
-    SUB r4, r4, #4   @ls->size -1
-    LDR r6, [r5, r4] @ls -> sortedList(ls->size - 1)
+    
+    @ Calculate byte offset for desired element
+    LSL r4, #2              @ multiply size by 4
+    SUB r4, r4, #4          @ls->size -1
+
+    @ Grab the max element 
+    LDR r6, [r5, r4]        @ls -> sortedList(ls->size - 1)
     MOV r0, r6      
 
     @ put your return value in r0 here:    

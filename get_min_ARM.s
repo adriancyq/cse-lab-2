@@ -11,24 +11,30 @@ get_min_ARM:
     @ Save caller's registers on the stack
     push {r4-r11, ip, lr}
 
-    @ YOUR CODE GOES HERE (list *ls is in r0)
+    @ R0 list *ls
     @-----------------------
 
-    LDR r4, [r0, #4] @accesing size from struct
-    LDR r5, [r0]     @address that holds the first element
-    CMP r4, #0       @ls->size == 0
+    @ Grab the size and address of sortedList
+    LDR r4, [r0, #4]            @accesing size from struct
+    LDR r5, [r0]                @address that holds the first element
+
+    @ Check if the sortedList is empty
+    CMP r4, #0                  @ls->size == 0
     BNE notEqual
-    MOV r0, #-1     @return -1
+
+    @ Return -1 if empty 
+    MOV r0, #-1                 @return -1
     B end
 
-    notEqual: 
-        LDR r6, [r5] 
-        MOV r0, r6  
+notEqual:
+    
+    @ Load the first element in the sortedList
+    LDR r6, [r5] 
+    MOV r0, r6  
 
-    end: 
+end: 
 
     @ put your return value in r0 here:  
-
     mov r0,r0  
 
     @-----------------------
@@ -38,6 +44,7 @@ get_min_ARM:
 
     @ ARM equivalent of return
     BX lr
+    
 .endfunc
 
 .end

@@ -93,26 +93,26 @@ listNotEmpty:
 sortLoop: 
     
     @ Iterate through list backward, stop at second element 
-    @CMP R7, #1
-    @ADDLT R0, R7, #1
-    @BLT end 
+    CMP R7, #1
+    ADDLT R0, R7, #1
+    BLT end 
 
     @ Grab the current element and the one before it 
-    @LDR R10, [R4, R7, LSL #2]
-    @SUB R8, R7, #1
-    @LDR R11, [R4, R8, LSL #2]
+    LDR R10, [R4, R7, LSL #2]
+    SUB R8, R7, #1
+    LDR R11, [R4, R8, LSL #2]
 
     @ Compare the element at current index to the one before 
-    @CMP R10, R11 
-    @BGE end 
+    CMP R10, R11 
+    BGE end 
 
     @ Switch the two elements
-    @STR R10, [R4, R8, LSL #2]
-    @STR R11, [R4, R7, LSL #2]
+    STR R10, [R4, R8, LSL #2]
+    STR R11, [R4, R7, LSL #2]
 
     @ Update the index and go back to beginning 
-    @SUB R7, R7, #1 
-    @B sortLoop 
+    SUB R7, R7, #1 
+    B sortLoop 
 
 
 end:
