@@ -28,6 +28,14 @@ int main(void)
     printf("Element: %d.\n", testList->sortedList[5]);
     printf("Passed test cases for Insert_ARM.\n");
 
+    /* Testing Search */
+    printf("Search result: %d.\n", search_ARM(testList, 1));
+    printf("Search result: %d.\n", search_ARM(testList, 2));
+    printf("Search result: %d.\n", search_ARM(testList, 3));
+    printf("Search result: %d.\n", search_ARM(testList, 4));
+    printf("Search result: %d.\n", search_ARM(testList, 5));
+    printf("Search result: %d.\n", search_ARM(testList, 6));
+
     // /* BEGIN REMOVE_VAL: testing deletion of multiple elements */
     // insert(testList, 6);
 

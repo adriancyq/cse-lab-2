@@ -37,7 +37,7 @@ iterate:
     CMP R7, R1
 
     @ If not equal, then we have not found the element 
-    ADD R6, R6, #1
+    ADDNE R6, R6, #1
     BNE iterate
 
     @ If equal, we found the element 
